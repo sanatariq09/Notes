@@ -33,20 +33,10 @@ Start the server:
 
 npm start
 
-Server-Side Folder Structure
-
 Usage
 
 1. Browser me "http://localhost:5000" open karein.
 2. Register aur login karein.
 3. Apne notes create, edit, view aur delete karein.
-
-Contributing
-
-Pull requests welcome. Major changes se pehle issue open karein.
-
-License
-
-"MIT" (LICENSE)
 
 ![Image](https://github.com/user-attachments/assets/866ad9f8-5356-4619-9e0f-34d87ca568db)
