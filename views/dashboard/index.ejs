@@ -1,0 +1,95 @@
+<div class="container-fluid dashboard-container">
+
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="welcome-text">Hey, <%= userName %></h1>
+    </div>
+    <div class="col text-end">
+      <a href="/dashboard/add" class="new-note-btn">+ New Note</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <% if (notes.length > 0) { for(var i=0; i < notes.length; i++) { %>
+      <div class="col-sm-3 mb-4">
+        <div class="note-card">
+          <div class="card-body">
+            <h5 class="card-title"><%= notes[i].title %></h5>
+            <p class="card-text"><%= notes[i].body %></p>
+          </div>
+          <div class="card-actions">
+            <a href="/dashboard/item/<%= notes[i]._id %>" class="edit-btn">Edit</a>
+            <button class="delete-btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<%= notes[i]._id %>">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Modal for each note -->
+      <div class="modal fade" id="deleteModal<%= notes[i]._id %>" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content delete-modal">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Note</h5>
+              <button type="button" class="close-btn" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Delete "<b><%= notes[i].title %></b>" permanently?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="cancel-btn" data-bs-dismiss="modal">Cancel</button>
+              <form action="/dashboard/item-delete/<%= notes[i]._id %>?_method=DELETE" method="POST">
+                <button type="submit" class="confirm-delete-btn">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%  }} else { %>
+      <div class="empty-state">
+        <div class="empty-illustration">
+          <img src="/img/human-3.svg" alt="Create your first note">
+        </div>
+        <div class="empty-content">
+          <h2>Let's get started!</h2>
+          <h4>Create your first note and organize your thoughts<br/><br/>
+            <a href="/dashboard/add" class="cta-link">Create Note</a>
+          </h4>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+   <% if(notes.length > 0) { %>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center mt-5">
+        <% if(current == 1) { %>
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <% } else { %>
+          <li class="page-item"><a class="page-link" href="/dashboard">First</a></li>
+        <% }  %>
+        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+        <% if (i !== 1 ) { %>
+          <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <% } %>
+        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+          <% if(i == current ) { %>
+            <li class="page-item"><a class="page-link" href="#"><%= i %></a></li>
+          <% } else { %>
+            <li class="page-item"><a class="page-link" href="/dashboard/?page=<%= i %>"><%= i %></a></li>
+          <% } %>
+          <% if(i == Number(current) + 4 && i < pages) { %>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+          <% } %>
+        <% } %>
+        <% if (current == pages) { %>
+            <li class="page-item disabled"><a class="page-link">Last</a></li>
+        <% } else { %>
+            <li class="page-item"><a href="/dashboard/?page=<%= pages %>" class="page-link">Last</a></li>
+        <% } %>
+      </ul>
+    </nav>
+
+  <% } %>
+
+
+</div>

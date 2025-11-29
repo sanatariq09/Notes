@@ -1,0 +1,57 @@
+<div class="container-fluid note-view-container">
+
+  <div class="row mb-4">
+    <div class="col">
+      <nav aria-label="breadcrumb" class="note-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+          <li class="breadcrumb-item active"><%= note.title %></li>
+        </ol>
+      </nav>
+      <div class="note-header">
+        <h1 class="note-title">View Note</h1>
+        <div class="action-buttons">
+          <a href="/dashboard" class="back-btn">Back</a>
+          <button type="button" class="delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form action="/dashboard/item/<%= noteID %>?_method=PUT" method="POST" class="note-form">
+    <div class="form-group mb-4">
+      <input type="text" class="form-control title-input" id="title" name="title" value="<%= note.title %>" placeholder="Title">
+    </div>
+
+    <div class="form-group mb-4">
+      <textarea class="form-control body-textarea" id="body" name="body" placeholder="Take a note..." rows="12"><%= note.body %></textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="update-btn-with-icon">Update Note</button>
+    </div>
+  </form>
+
+</div>
+
+<div class="modal fade" tabindex="-1" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content delete-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Note</h5>
+        <button type="button" class="close-btn" data-bs-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Delete "<b><%= note.title %></b>" permanently? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="cancel-btn" data-bs-dismiss="modal">Cancel</button>
+        <form action="/dashboard/item-delete/<%= noteID %>?_method=DELETE" method="POST">
+          <button type="submit" class="confirm-delete-btn">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
