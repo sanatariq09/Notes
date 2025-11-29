@@ -35,24 +35,6 @@ npm start
 
 Server-Side Folder Structure
 
-ScribblyNote/
-├── app.js             # Main server file
-├── config/
-│   └── passport.js    # Passport.js configuration
-├── models/
-│   ├── User.js        # User schema
-│   └── Note.js        # Note schema
-├── routes/
-│   ├── auth.js        # Authentication routes (login, register)
-│   └── notes.js       # Notes CRUD routes
-├── controllers/
-│   ├── authController.js  # Logic for authentication
-│   └── notesController.js # Logic for note operations
-├── middleware/
-│   └── auth.js        # Middleware to protect routes
-├── views/             # Frontend templates (EJS or HTML)
-└── package.json
-
 Usage
 
 1. Browser me "http://localhost:5000" open karein.
@@ -66,3 +48,5 @@ Pull requests welcome. Major changes se pehle issue open karein.
 License
 
 "MIT" (LICENSE)
+
+![Image](https://github.com/user-attachments/assets/866ad9f8-5356-4619-9e0f-34d87ca568db)
